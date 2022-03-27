@@ -4,6 +4,7 @@ import java.util.List;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +18,15 @@ public class PlayerDemoController {
 	
 	@Autowired
 	PlayerService playerService;
+
+	@Value("${player.filename}")
+	String fileName;
 	
 	@GetMapping(value = "/api/players")
 	public List<Player> getPlayers () {
 		
 		log.info("PlayerDemoController : getPlayers(), Begin Controller");
-		return playerService.getAllPlayers("player.csv");
+		return playerService.getAllPlayers(fileName);
 	}
 
 }

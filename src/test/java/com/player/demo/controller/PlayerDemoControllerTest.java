@@ -6,6 +6,7 @@ import com.player.demo.dto.Player;
 import com.player.demo.service.PlayerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -47,7 +48,7 @@ public class PlayerDemoControllerTest {
      Player player2 = new Player("Laxman",170,189,2005,location2);
      playerList.add(player1);
      playerList.add(player2);
-     when(playerService.getAllPlayers("player.csv")).thenReturn(playerList);
+     Mockito.when(playerService.getAllPlayers(Mockito.anyString())).thenReturn(playerList);
      mockMvc.perform(get("/api/players")).andDo(print()).andExpect(status().isOk())
              .andExpect(content().string(containsString(objectMapper.writeValueAsString(playerList))));
     }
@@ -55,7 +56,7 @@ public class PlayerDemoControllerTest {
     @Test
     public void exceptionThrown () throws Exception {
         Exception e = new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to process data");
-        when(playerService.getAllPlayers("player.csv")).thenThrow(e);
+        Mockito.when(playerService.getAllPlayers(Mockito.anyString())).thenThrow(e);
         mockMvc.perform(get("/api/players")).andDo(print()).andExpect(status().is5xxServerError())
                 .andExpect(result -> assertThat(result.getResolvedException().getMessage(),containsString("Unable to process data")));
     }
