@@ -8,8 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +37,11 @@ public class PlayerServiceImpl implements PlayerService  {
 				else
 					log.warn("Skipping this line due to insufficient data");
 			}
-
+			reader.close();
         }
 
 		catch(Exception e) {
-			log.error("Exception occured and exception is: " + e);
+			log.error("Exception occured while retreiving Playeyers list and exception is: " + e);
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Unable to process data");
 		}
 

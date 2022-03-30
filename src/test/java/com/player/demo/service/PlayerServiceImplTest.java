@@ -3,21 +3,16 @@ package com.player.demo.service;
 import com.player.demo.dto.Player;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@RunWith(MockitoJUnitRunner.class)
 public class PlayerServiceImplTest {
 
-    @Autowired
-    PlayerService playerService;
-
+    PlayerService playerService = new PlayerServiceImpl();
 
     @Test
     public void testGetAllPlayers() {
