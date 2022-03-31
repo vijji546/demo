@@ -1,8 +1,8 @@
-#Spring Boot "Player Microservice" Project
+# Spring Boot "Player Microservice" Project
 
 This is a sample Java / Maven / Spring Boot application that can be used to retrieve list of players
 
-##How to Run
+## How to Run
 * Clone this repository
 * Make sure you are using JDK 1.8 
 * You can build the project and run the tests by running ```mvn clean package```
